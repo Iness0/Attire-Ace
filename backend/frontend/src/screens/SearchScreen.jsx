@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import Product from '../component/Product';
 import Loader from "../component/Loader";
 import {useDispatch, useSelector} from 'react-redux'
-import {listProducts, searchProducts} from "../actions/productActions";
+import {searchProducts} from "../actions/productActions";
 import Message from "../component/Message";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 function FilteredProductsScreen() {
@@ -12,7 +12,7 @@ function FilteredProductsScreen() {
     const location = useLocation()
 
     const productList = useSelector(state => state.productList)
-    const {error, loading, products, page, pages} = productList
+    const {error, products, page, pages} = productList
 
     const searchParams = new URLSearchParams(location.search);
     const keyword = searchParams.get('keyword')
@@ -20,7 +20,7 @@ function FilteredProductsScreen() {
 
     useEffect(() => {
         dispatch(searchProducts(keyword, current_page))
-    }, [location])
+    }, [location, current_page, keyword])
 
     const fetchMoreData = () => {
         if (page >= pages) {

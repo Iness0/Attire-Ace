@@ -37,7 +37,8 @@ import {
     USER_ADDRESS_UPDATE_FAIL,
     USER_INFO_GET_REQUEST,
     USER_INFO_GET_FAIL,
-    USER_INFO_GET_SUCCESS, USER_INFO_GET_RESET,
+    USER_INFO_GET_SUCCESS,
+    USER_INFO_GET_RESET,
 } from "../constants/userConstants";
 import axios from '../axiosSettings'
 import {ORDER_LIST_MY_RESET} from "../constants/orderConstants";
@@ -117,16 +118,9 @@ export const register = (name, email, password) => async (dispatch) => {
             type: USER_REGISTER_REQUEST,
         });
 
-        const config = {
-            headers: {
-                'content-type': 'application/json',
-            },
-        }
         const {data} = await axios.post(
             '/api/users/register/',
-            {'name': name, 'email': email, 'password': password},
-            config
-        )
+            {'name': name, 'email': email, 'password': password})
 
         dispatch({
             type: USER_REGISTER_SUCCESS,
@@ -184,17 +178,9 @@ export const updateUserProfile = (user) => async (dispatch) => {
             type: USER_UPDATE_PROFILE_REQUEST,
         });
 
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
-
         const {data} = await axios.put(
             `/api/users/profile/update/`,
-            user,
-            config
-        )
+            user)
 
         dispatch({
             type: USER_UPDATE_PROFILE_SUCCESS,
@@ -254,16 +240,8 @@ export const deleteUser = (id) => async (dispatch) => {
             type: USER_DELETE_REQUEST,
         });
 
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
-
         const {data} = await axios.delete(
-            `/api/users/delete/${id}`,
-            config
-        )
+            `/api/users/delete/${id}`)
 
         dispatch({
             type: USER_DELETE_SUCCESS,

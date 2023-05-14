@@ -17,9 +17,7 @@ import {
     PRODUCT_CREATE_REVIEW_SUCCESS,
     PRODUCT_CREATE_REVIEW_REQUEST,
     PRODUCT_CREATE_REVIEW_FAIL,
-    PRODUCT_TOP_FAIL,
-    PRODUCT_TOP_REQUEST,
-    PRODUCT_TOP_SUCCESS, SET_GENDER,
+    SET_GENDER,
     PRODUCT_LIST_APPEND
 } from "../constants/productConstants";
 import axios from '../axiosSettings'
@@ -138,25 +136,14 @@ export const listProductdetails = (id) => async (dispatch) => {
 };
 
 
-export const deleteProduct = (id) => async (dispatch, getState) => {
+export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({
             type: PRODUCT_DELETE_REQUEST,
         });
 
-        const {
-            userLogin: {userInfo},
-        } = getState()
-
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
-
         const {data} = await axios.delete(
-            `/api/products/delete/${id}`,
-            config
+            `/api/products/delete/${id}`
         )
 
         dispatch({
@@ -176,27 +163,15 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 }
 
 
-export const createProduct = () => async (dispatch, getState) => {
+export const createProduct = () => async (dispatch) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REQUEST,
         });
 
-        const {
-            userLogin: {userInfo},
-        } = getState()
-
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
-
         const {data} = await axios.post(
             `/api/products/create/`,
-            {},
-            config
-        )
+            {})
 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
@@ -215,27 +190,16 @@ export const createProduct = () => async (dispatch, getState) => {
 }
 
 
-export const updateProduct = (product) => async (dispatch, getState) => {
+export const updateProduct = (product) => async (dispatch) => {
     try {
         dispatch({
             type: PRODUCT_UPDATE_REQUEST,
         });
 
-        const {
-            userLogin: {userInfo},
-        } = getState()
-
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
 
         const {data} = await axios.put(
             `/api/products/update/${product._id}/`,
-            product,
-            config
-        )
+            product)
 
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
@@ -259,27 +223,16 @@ export const updateProduct = (product) => async (dispatch, getState) => {
 }
 
 
-export const createProductReview = (productId, review) => async (dispatch, getState) => {
+export const createProductReview = (productId, review) => async (dispatch) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REVIEW_REQUEST,
         });
 
-        const {
-            userLogin: {userInfo},
-        } = getState()
-
-        const config = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        }
 
         const {data} = await axios.post(
             `/api/products/${productId}/reviews/`,
-            review,
-            config
-        )
+            review)
 
         dispatch({
             type: PRODUCT_CREATE_REVIEW_SUCCESS,
@@ -293,29 +246,6 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
                 error.response && error.response.data.detail
                     ? error.response.data.detail
                     : error.message,
-        })
-    }
-}
-
-
-export const listTopProducts = () => async (dispatch) => {
-    try {
-        dispatch({type: PRODUCT_TOP_REQUEST})
-
-        const {data} = await axios.get(
-            `/api/products/top`)
-
-        dispatch({
-            type: PRODUCT_TOP_SUCCESS,
-            payload: data
-        })
-
-    } catch (error) {
-        dispatch({
-            type: PRODUCT_TOP_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
-                : error.message,
         })
     }
 }

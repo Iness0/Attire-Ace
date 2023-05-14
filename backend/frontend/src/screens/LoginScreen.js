@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {Link, useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import Message from "../component/Message";
 import Loader from "../component/Loader";

@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {Form, Row, Col, Table} from "react-bootstrap";
 import Message from "../component/Message";
 import Loader from "../component/Loader";
-import {getUserDetails, getUserInfo, updateUserProfile} from "../actions/userActions";
+import {getUserDetails, updateUserProfile} from "../actions/userActions";
 import {USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 import {listMyOrders} from "../actions/orderActions";
 import {LinkContainer} from 'react-router-bootstrap'
@@ -29,7 +29,7 @@ function ProfileScreen() {
     const {error, loading, user} = userDetails
 
     const userLogin = useSelector(state => state.userInfo)
-    const {loading: loadingUser, error: errorUser, user: userInfo} = userLogin
+    const {loading: loadingUser, user: userInfo} = userLogin
 
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const {success} = userUpdateProfile

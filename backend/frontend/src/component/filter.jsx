@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useLocation, Link} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import {Accordion, AccordionTab} from 'primereact/accordion';
 import {Checkbox} from 'primereact/checkbox';
 import PriceRange from "./price-slider";

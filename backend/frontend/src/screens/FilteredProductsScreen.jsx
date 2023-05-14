@@ -3,7 +3,7 @@ import Product from '../component/Product';
 import Loader from "../component/Loader";
 import {useDispatch, useSelector} from 'react-redux'
 import {listProducts} from "../actions/productActions";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import Filter from "../component/filter";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {Sidebar} from 'primereact/sidebar';
@@ -16,7 +16,7 @@ function FilteredProductsScreen() {
     const location = useLocation()
 
     const productList = useSelector(state => state.productList)
-    const {error, loading, products, page, pages} = productList
+    const {products, page, pages} = productList
 
     const [visible, setVisible] = useState(false)
     const searchParams = new URLSearchParams(location.search);
@@ -45,8 +45,7 @@ function FilteredProductsScreen() {
         if (page >= pages) {
             return;
         }
-        const newPage = page + 1;
-        queryObj.page = newPage;
+        queryObj.page = page + 1;
         dispatch(listProducts(selectedGender, category, sortingFilter, queryObj));
     };
 

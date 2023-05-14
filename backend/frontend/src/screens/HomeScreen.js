@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {setGender} from "../actions/productActions";
 import {useNavigate, useParams} from "react-router-dom";

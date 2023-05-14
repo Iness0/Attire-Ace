@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Container} from "react-bootstrap";
 import CheckoutSteps from '../component/CheckoutComponent'
 import AddressManager from "../component/Addresses";

@@ -172,10 +172,10 @@ MEDIA_URL = 'images/'
 
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    # BASE_DIR / "frontend/build/static"
+    # BASE_DIR / "static",
+    BASE_DIR / "frontend/build/static"
 ]
-
+STATIC_ROOT = BASE_DIR / "static"
 MEDIA_ROOT = 'static/images'
 
 CORS_ALLOW_ALL_ORIGINS = True
