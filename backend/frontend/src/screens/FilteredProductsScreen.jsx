@@ -90,7 +90,7 @@ function FilteredProductsScreen() {
                     >
                         <div className="grid">
                             {products.map(product => (
-                                <div key={product._id} className="col-6 md:col-4 lg:col-3">
+                                <div key={product._id} className="col-6 md:col-4 lg:col-4">
                                     <Product product={product} height={'18rem'}/>
                                 </div>
                             ))}

@@ -176,7 +176,7 @@ b, strong {
 .filter {
     max-height: calc(100vh - 300px);
     position: sticky;
-    top: 100px;
+    top: 150px;
     width: 300px;
     overflow-y: auto;
 }
@@ -424,7 +424,7 @@ h4 {
     }
 
     .card-img {
-        height: 12rem !important;
+        height: 13rem !important;
     }
 
     .rating {

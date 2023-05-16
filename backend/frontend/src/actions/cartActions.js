@@ -8,7 +8,7 @@ import {
 
 
 export const addToCart = (id, size, qty) => async (dispatch, getState) => {
-    const {data} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`/api/products/${id}/`)
 
     dispatch({
         type: CART_ADD_ITEM,
@@ -38,7 +38,7 @@ export const removeFromCart = (id, size) => (dispatch, getState) => {
 }
 
 export const updateCartItem = (id, old_size_id, size, qty) => async (dispatch, getState) => {
-    const {data} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`/api/products/${id}/`)
 
     dispatch({
         type: CART_UPDATE_ITEM,

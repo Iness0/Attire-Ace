@@ -1,0 +1,10 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/react_django_shop/backend
+ExecStart=/var/www/react_django_shop/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/react_django_shop/backend/backend.sock backend.wsgi:application
+[Install]
+WantedBy=multi-user.target

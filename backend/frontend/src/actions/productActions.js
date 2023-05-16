@@ -30,10 +30,9 @@ export const listProducts = (gender = 'men',
 ) => async (dispatch) => {
     try {
         dispatch({type: PRODUCT_LIST_REQUEST})
-        console.log('Listing products')
         const baseUrl = category
-            ? `/api/products/${gender}/cat/${category}`
-            : `/api/products/${gender}/cat`;
+            ? `/api/products/${gender}/cat/${category}/`
+            : `/api/products/${gender}/cat/`;
 
         const queryParams = new URLSearchParams();
         queryObj && Object.keys(queryObj).forEach(key => {
@@ -45,7 +44,6 @@ export const listProducts = (gender = 'men',
 
         const url = `${baseUrl}?${queryParams.toString()}`;
         const {data} = await axios.get(url)
-        console.log(queryObj.page)
         if (queryObj.page && parseInt(queryObj.page) > 1) {
             dispatch({
                 type: PRODUCT_LIST_APPEND,
@@ -76,7 +74,7 @@ export const searchProducts = (keyword, page) => async (dispatch) => {
         const queryParams = new URLSearchParams();
         queryParams.append("keyword", keyword);
         queryParams.append("page", page);
-        const url = `/api/products/search?${queryParams.toString()}`;
+        const url = `/api/products/search/?${queryParams.toString()}`;
 
         const {data} = await axios.get(url)
 
@@ -117,7 +115,7 @@ export const listProductdetails = (id) => async (dispatch) => {
     try {
         dispatch({type: PRODUCT_DETAILS_REQUEST});
 
-        const {data} = await axios.get(`/api/products/${id}`);
+        const {data} = await axios.get(`/api/products/${id}/`);
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -143,7 +141,7 @@ export const deleteProduct = (id) => async (dispatch) => {
         });
 
         const {data} = await axios.delete(
-            `/api/products/delete/${id}`
+            `/api/products/delete/${id}/`
         )
 
         dispatch({

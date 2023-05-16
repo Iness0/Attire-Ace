@@ -10,11 +10,10 @@ import {
 
 export const addToWishlist = (id, size) => async (dispatch, getState) => {
     try {
-        console.log(id, size)
         dispatch({
             type: ADD_TO_WISHLIST_REQUEST,
         })
-        const {data} = await axios.get(`/api/products/${id}`)
+        const {data} = await axios.get(`/api/products/${id}/`)
         dispatch({
             type: ADD_TO_WISHLIST_SUCCESS,
             payload: {
@@ -52,7 +51,7 @@ export const removeFromWishlist = (size_id) => (dispatch, getState) => {
 }
 
 export const updateWishlist = (id, old_size_id, size) => async (dispatch, getState) => {
-    const {data} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`/api/products/${id}/`)
     dispatch({
         type: UPDATE_WISHLIST,
         payload: {
