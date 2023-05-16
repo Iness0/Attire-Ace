@@ -42,7 +42,7 @@ function WishlistScreen() {
 
     return (
         <Row>
-            <Col md={12} lg={8}>
+            <Col xs={12}>
                 <h1>Your wishlist</h1>
                 {(!wishlist || wishlist.length === 0) ? (
                     <Message variant='info'>
@@ -55,17 +55,19 @@ function WishlistScreen() {
                         {wishlist.map((item) => (
                             <ListGroup.Item key={item.product + item.size}>
                                 <Row>
-                                    <Col md={2} className={'flex align-items-center'}>
+                                    <Col xs={4} md={2} className={'flex align-items-center'}>
                                         <Image src={item.image} alt={item.name} fluid rounded/>
                                     </Col>
-                                    <Col md={2} className={'flex align-items-center'}>
+                                    <Col xs={8} md={10}>
+                                <Row>
+                                    <Col md={2} className={'flex align-items-center mt-3'}>
                                         <Link to={`/product/${item.product}`}
                                               style={{textDecoration: 'none', fontWeight: 'bold'}}>{item.name}</Link>
                                     </Col>
-                                    <Col md={1} className={'flex align-items-center'}>
+                                    <Col md={2} className={'flex align-items-center mt-3'}>
                                         ${item.price}
                                     </Col>
-                                    <Col md={3} className={'flex align-items-center'}>
+                                    <Col md={3} lg={3} className={'flex align-items-center mt-3'}>
                                         <div key={item.size} style={{width: '100%'}}
                                         >
                                             <Form.Control
@@ -85,29 +87,29 @@ function WishlistScreen() {
                                         </div>
 
                                     </Col>
-                                    <Col md={1} className={'flex align-items-center'}>
+                                    <Col md={5} className={'flex align-items-center mt-3'}>
                                         <Button
                                             type='button'
                                             variant='light'
                                             onClick={() => removeFromWishlistHandler(item.size_id)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
-                                    </Col>
-                                    <Col md={3} className={'flex align-items-center'}>
                                         {
                                             cartItems.some(cartItem => cartItem.size_id === item.size_id)
                                                 ? <Button type='button' variant='dark'
                                                           onClick={() => navigate('/cart')}>
-                                                    Already in cart
+                                                    In cart
                                                 </Button>
                                                 : item.size ? <Button type='button' variant='dark'
                                                                          onClick={() => addToCartHandler(item.product, item.size)}>
                                                         Add to cart
                                                     </Button>
                                                     : <Button type='button' disabled variant='dark'>
-                                                        Choose size to add to cart
+                                                        Choose size
                                                     </Button>
                                         }
+                                    </Col>
+                                </Row>
                                     </Col>
                                 </Row>
                             </ListGroup.Item>

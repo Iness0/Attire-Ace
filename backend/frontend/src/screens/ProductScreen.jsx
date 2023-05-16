@@ -11,7 +11,8 @@ import {Dropdown} from 'primereact/dropdown';
 import {Button} from 'primereact/button';
 import {TabView, TabPanel} from 'primereact/tabview';
 import Product from "../component/Product";
-import { Image } from 'primereact/image';
+import {Image} from 'primereact/image';
+import {addToWishlist, removeFromWishlist} from "../actions/wishlistActions";
 
 
 function ProductScreen() {
@@ -27,8 +28,12 @@ function ProductScreen() {
     const {loading, error, product, additional_products} = productDetails
     const sizeAvaliable = product.sizes.filter((size) => size.countInStock > 0)
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const {userInfo} = userLogin
+    const {wishlist} = useSelector((state) => state.wishlist);
+    const isProductInWishlist = wishlist.some(item => item.product === id);
+
+
+    const userLogin = useSelector((state) => state.userInfo)
+    const {user: userInfo} = userLogin
 
     const productReviewCreate = useSelector((state) => state.productReviewCreate)
     const {
@@ -57,16 +62,19 @@ function ProductScreen() {
         navigate(`/cart/${id}?size=${size}`)
     }
 
-    const addToWishlistHandler = () => {
-        navigate(`/wishlist/${id}?size=${size}`)
+    const addToWishlistHandler = (id) => {
+        dispatch(addToWishlist(id));
     }
+    const removeFromWishlistHandler = (id) => {
+        dispatch(removeFromWishlist(id))
+    };
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(createProductReview(id, {rating, comment}))
     }
 
     return (<div>
-        <Link to='/' className='btn btn-light my-3'>Go Back</Link>
+        <Link to='#' className='btn btn-light my-3' onClick={() => navigate(-1)}>Go Back</Link>
         {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (<div>
             <Row>
                 <Col md={8}>
@@ -97,7 +105,7 @@ function ProductScreen() {
                     </ListGroup>
 
                     {sizeAvaliable && (
-                        <div className="ms-3 my-3" style={{}}>
+                        <div className="ms-3 my-3">
                             <Dropdown
                                 value={size}
                                 options={product.sizes.map((size, index) => ({
@@ -110,15 +118,20 @@ function ProductScreen() {
                                 style={{width: '74%'}}
                             />
                         </div>)}
-                    <div className='flex m-3' style={{gap: '2rem'}}>
+                    <div className=' product-page-buttons'>
                         <Button
                             onClick={addToCartHandler}
                             disabled={size === ""}
                             label="Add to cart"/>
-
+                        {isProductInWishlist ? (<Button
+                            onClick={() => removeFromWishlistHandler(id)}
+                            label="Already in wishlist"  outlined><i className='pi pi-heart-fill'
+                                     style={{ color: 'red', paddingLeft: '0.5rem' }}></i></Button>)
+                        :
                         <Button
-                            onClick={addToWishlistHandler}
+                            onClick={() => addToWishlistHandler(id)}
                             label="Add to wishlist" icon="pi pi-heart" iconPos="right" outlined/>
+                        }
                     </div>
                 </Col>
             </Row>
@@ -156,9 +169,9 @@ function ProductScreen() {
                 </div>
             </Row>
             <Row>
-                <Col md={6} >
+                <Col md={6}>
                     <h4 className='ms-3'>Reviews</h4>
-                    {product.reviews.length === 0 && <Message  variant='info'>No reviews</Message>}
+                    {product.reviews.length === 0 && <Message variant='info'>No reviews</Message>}
                     <ListGroup variant='flush'>{product.reviews.map((review) => (
                         <ListGroup.Item key={review._id}><strong>{review.name}</strong>
                             <Rating value={review.rating} color='#f8e825'/>
@@ -173,7 +186,7 @@ function ProductScreen() {
                             {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
 
                             {userInfo ? (<Form onSubmit={submitHandler}>
-                                <Form.Group controlId='rating' >
+                                <Form.Group controlId='rating'>
                                     <Form.Label>Rating</Form.Label>
                                     <Form.Control as='select' value={rating}
                                                   onChange={(e) => setRating(e.target.value)}>
@@ -203,7 +216,7 @@ function ProductScreen() {
             <Row>
                 <h4>You also may be interested</h4>
                 {additional_products.length > 0 && (additional_products.map(product => (
-                    <div key={product._id} className="col-6 md:col-4 lg:col-3" >
+                    <div key={product._id} className="col-6 md:col-4 lg:col-3">
                         <Product product={product} height={'20rem'}/>
                     </div>
                 )))}

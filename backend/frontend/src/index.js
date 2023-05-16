@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from "react-redux";
 import store from "./store"
+import "/node_modules/primeflex/primeflex.css";
 import './bootstrap.min.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "primereact/resources/primereact.min.css";
-import "/node_modules/primeflex/primeflex.css";
 import "./assets/theme.css";
 import 'primeicons/primeicons.css';
 

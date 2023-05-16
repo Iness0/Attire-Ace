@@ -59,21 +59,23 @@ const Footer = () => {
                 </Accordion>
             </div>
             <Row className="d-none d-md-flex">
-                <Col md={4}><h5 style={{color: 'white'}}>Customer Information</h5>
-                    <ul style={{listStyleType: 'none'}}>
+                <Col md={4}>
+                    <h5 style={{color: 'white'}}>Customer Information</h5>
+                    <ul style={{listStyleType: 'none', padding: 0}}>
                         <Link to={'/info/1'} style={{textDecoration: 'none', color: 'inherit'}}>
                             <li>Delivery Information</li>
-                        </Link>
-                        <Link to={'/info/2'} style={{textDecoration: 'none', color: 'inherit'}}>
-                            <li>Payment</li>
                         </Link>
                         <Link to={'/info/3'} style={{textDecoration: 'none', color: 'inherit'}}>
                             <li>Return Policy</li>
                         </Link>
+                        <Link to={'/info/2'} style={{textDecoration: 'none', color: 'inherit'}}>
+                            <li>Payment</li>
+                        </Link>
                     </ul>
                 </Col>
-                <Col md={4} style={{textAlign: "center"}}><h5 style={{color: 'white'}}>Follow us</h5>
-                    <span className="flex justify-content-center gap-3 mt-3">
+                <Col md={4} style={{paddingLeft: '3rem'}}>
+                    <h5 style={{color: 'white'}}>Follow us</h5>
+                    <span className="flex  gap-3 mt-3">
                         <a href={"https://www.linkedin.com/in/yury-ash-a74058253/"}
                            style={{textDecoration: 'none', color: 'inherit'}}>
                         <i className="pi pi-linkedin"></i></a>

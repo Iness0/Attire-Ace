@@ -8,7 +8,7 @@ import {
 } from "../constants/wishlistConstants";
 
 
-export const addToWishlist = (id, size) => async (dispatch, getState) => {
+export const addToWishlist = (id, size='') => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADD_TO_WISHLIST_REQUEST,
@@ -24,7 +24,6 @@ export const addToWishlist = (id, size) => async (dispatch, getState) => {
                 sizes: data.product.sizes,
                 size,
                 size_id: data.product._id + size
-
             },
         })
         localStorage.setItem('wishlist', JSON.stringify(getState().wishlist.wishlist))
