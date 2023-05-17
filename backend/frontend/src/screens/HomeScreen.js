@@ -12,11 +12,16 @@ function HomeScreen() {
 
     const {gender} = useParams()
     const preferences = useSelector(state => state.preferences)
-    const selectedGender = gender == 'null' ||  gender == null
-        ? preferences.gender == 'null' || gender == null
-          ? "men"
-          : preferences.gender
-        : gender;
+
+    let selectedGender;
+    if (gender === 'men' || gender === 'women') {
+        selectedGender = gender;
+    } else if (preferences.gender === 'men' || preferences.gender === 'women') {
+        selectedGender = preferences.gender;
+    } else {
+        selectedGender = 'men'
+    }
+
 
 
 

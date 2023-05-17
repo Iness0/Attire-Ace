@@ -23,7 +23,12 @@ function Header() {
 
 
     const gender = useSelector(state => state.preferences.gender)
-    const genderf = gender == null ? 'men' : gender;
+    let genderChosen;
+    if (gender === 'men' || gender === 'women') {
+        genderChosen = gender;
+    } else {
+        genderChosen = 'men';
+    }
 
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [categoriesVisible, setCategoriesVisible] = useState(false);
@@ -44,7 +49,7 @@ function Header() {
     }
 
     const nodes = () => {
-        const genderSubcategories = subcategories[genderf];
+        const genderSubcategories = subcategories[genderChosen];
 
         const treeData = Object.entries(genderSubcategories).map(([categoryKey, categoryData]) => {
             const categoryLabel = categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1);
@@ -140,7 +145,8 @@ function Header() {
                                     </LinkContainer>
                                 )}
                             </Sidebar>
-                            <Button icon="pi pi-bars" severity="info" text onClick={() => setCategoriesVisible(true)}/>
+                            <Button icon="pi pi-bars" severity="info" text
+                                    onClick={() => setCategoriesVisible(true)}/>
                         </div>
                     </Nav>
                     <LinkContainer to='/'>

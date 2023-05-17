@@ -217,7 +217,7 @@ function ProductScreen() {
             <div className='scrollable-products'>
                 {additional_products.length > 0 && (additional_products.map(product => (
                     <div key={product._id} className='scrollable-products-items'>
-                        <Product product={product} height={'20rem'}/>
+                        <Product product={product} height={'16rem'}/>
                     </div>
                 )))}
             </div>
