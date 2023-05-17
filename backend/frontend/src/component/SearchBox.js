@@ -22,14 +22,14 @@ function SearchBox() {
     }
 
     return (
-        <div className='search-box'>
-        <Form onSubmit={submitHandler} className={'d-flex'}>
+        <div>
+        <Form onSubmit={submitHandler}>
                         <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="text" placeholder="Search" onChange={(e) => setKeyword(e.target.value)} />
+                <InputText type="text" className='p-inputtext-sm' placeholder="Search" onChange={(e) => setKeyword(e.target.value)} />
             </span>
         </Form>
-</div>
+        </div>
     )
 }
 

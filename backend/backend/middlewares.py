@@ -22,6 +22,6 @@ class JWTAuthenticationMiddleware(MiddlewareMixin):
                         response.set_cookie('access_token', str(new_tokens.access_token), httponly=True)
                         return response
                     except Exception as e:
-                        print(e)
+                        print(f'refresh token exception: {e}')
             else:
                 request.META['HTTP_AUTHORIZATION'] = f'Bearer {token}'

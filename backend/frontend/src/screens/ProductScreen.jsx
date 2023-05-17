@@ -213,14 +213,14 @@ function ProductScreen() {
                     </ListGroup>
                 </Col>
             </Row>
-            <Row>
                 <h4>You also may be interested</h4>
+            <div className='scrollable-products'>
                 {additional_products.length > 0 && (additional_products.map(product => (
-                    <div key={product._id} className="col-6 md:col-4 lg:col-3">
+                    <div key={product._id} className='scrollable-products-items'>
                         <Product product={product} height={'20rem'}/>
                     </div>
                 )))}
-            </Row>
+            </div>
         </div>)}
     </div>)
 }

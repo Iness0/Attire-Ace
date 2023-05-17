@@ -22,7 +22,6 @@ function Header() {
     const {user} = useSelector(state => state.userInfo)
 
 
-
     const gender = useSelector(state => state.preferences.gender)
     const genderf = gender == null ? 'men' : gender;
 
@@ -166,7 +165,7 @@ function Header() {
                                 <Nav.Link><i className="fas fa-heart"></i> Wishlist</Nav.Link>
                             </LinkContainer>
                             {user ? (
-                                <NavDropdown title={user.name} id={'username'}>
+                                <NavDropdown className='me-0' title={user.name} id={'username'}>
                                     <LinkContainer to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
@@ -178,7 +177,7 @@ function Header() {
                                 </LinkContainer>
                             )}
                             {user && user.isAdmin && (
-                                <NavDropdown title='Admin' id={'adminmenu'}>
+                                <NavDropdown className='me-0' title='Admin' id={'adminmenu'}>
                                     <LinkContainer to='/admin/userlist'>
                                         <NavDropdown.Item>Users</NavDropdown.Item>
                                     </LinkContainer>
@@ -192,13 +191,25 @@ function Header() {
                             )}
                         </Nav>
                         <Nav className="d-flex d-lg-none mobile-menu">
-
                             <LinkContainer to='/wishlist'>
                                 <Nav.Link><i className="fas fa-heart"></i></Nav.Link>
                             </LinkContainer>
                             <LinkContainer to='/cart'>
                                 <Nav.Link><i className="fas fa-shopping-cart"></i></Nav.Link>
                             </LinkContainer>
+                            {user && user.isAdmin && (
+                                <NavDropdown title={<i className='pi pi-sitemap'></i>} id={'adminmenu'}>
+                                    <LinkContainer to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/productlist'>
+                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/orderlist'>
+                                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

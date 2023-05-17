@@ -55,10 +55,10 @@ function WishlistScreen() {
                         {wishlist.map((item) => (
                             <ListGroup.Item key={item.product + item.size}>
                                 <Row>
-                                    <Col xs={4} md={2} className={'flex align-items-center'}>
+                                    <Col xs={5} md={2} className={'flex align-items-center'}>
                                         <Image src={item.image} alt={item.name} fluid rounded/>
                                     </Col>
-                                    <Col xs={8} md={10}>
+                                    <Col xs={7} md={10}>
                                 <Row>
                                     <Col md={2} className={'flex align-items-center mt-3'}>
                                         <Link to={`/product/${item.product}`}

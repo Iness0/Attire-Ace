@@ -1,4 +1,6 @@
 from email.headerregistry import Address
+from functools import reduce
+from operator import and_
 from urllib.parse import unquote
 
 from django.conf import settings
@@ -38,7 +40,6 @@ def getProducts(request, gender):
         gender__name=gender,
     ).distinct()
     products, page, total_pages = paginate(products, page)
-    print(products, page, total_pages)
     serializer = ProductSchema(products, many=True)
     return Response({'products': serializer.data, 'page': page, 'pages': total_pages})
 
@@ -143,13 +144,13 @@ def getProduct(request, pk):
         categories = product.categories.all()
         category_count = categories.count()
 
-        related_products = Product.objects.filter(
-            Q(gender__in=genders) & Q(categories__in=categories) & ~Q(_id=pk)
-        ).annotate(
-                matched_categories_count=Count("categories")
-            ).filter(
-                matched_categories_count=category_count
-            ).distinct()[:4]
+        related_products = Product.objects.filter(gender__in=genders).exclude(_id=pk)
+
+        for category in categories:
+            related_products = related_products.filter(categories=category)
+
+        related_products = related_products.annotate(num_categories=Count('categories')).filter(
+            num_categories=category_count)[:5]
 
     else:
         related_products = []
@@ -177,9 +178,6 @@ def wishlistProduct(request, pk):
     wishlist, created = Wishlist.objects.get_or_create(user=user)
     wishlist.products.add(product)
     return Response('Product added to wishlist')
-
-
-
 
 
 @api_view(['POST'])

@@ -6,6 +6,7 @@ import {searchProducts} from "../actions/productActions";
 import Message from "../component/Message";
 import {useLocation} from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import {Col, Row} from 'react-bootstrap';
 
 function FilteredProductsScreen() {
     const dispatch = useDispatch()
@@ -45,13 +46,13 @@ function FilteredProductsScreen() {
                                    </p>
                                }
             >
-                <div className="grid">
+                <Row>
                     {products.map(product => (
-                        <div key={product._id} className="col-6 md:col-4 lg:col-3">
+                        <Col key={product._id} xs={6} md={4} lg={3}>
                             <Product product={product} height={'22rem'}/>
-                        </div>
+                        </Col>
                     ))}
-                </div>
+                </Row>
             </InfiniteScroll>)}
 
     </div>)

@@ -112,7 +112,6 @@ class OrderSchema(serializers.ModelSerializer):
     shippingAddress = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
 
-    print(shippingAddress)
     class Meta:
         model = Order
         fields = '__all__'
@@ -124,11 +123,9 @@ class OrderSchema(serializers.ModelSerializer):
 
     def get_shippingAddress(self, obj):
         try:
-            print(f'address is : {obj.shippingaddress}')
             address = ShippingAddressSchema(obj.shippingaddress, many=False)
         except:
             address = False
-            print(f'address does not exist')
             return address
         return address.data
 

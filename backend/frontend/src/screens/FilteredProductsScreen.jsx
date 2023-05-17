@@ -9,6 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import {Sidebar} from 'primereact/sidebar';
 import {Button} from 'primereact/button';
 import {Dropdown} from 'primereact/dropdown';
+import {Row, Col} from 'react-bootstrap'
 
 
 function FilteredProductsScreen() {
@@ -50,11 +51,11 @@ function FilteredProductsScreen() {
     };
 
     return (<div className="mt-3">
-        <div className="grid">
-            <div className="col-0 d-none d-lg-flex lg:col-3">
+        <Row>
+            <Col lg={3} className="d-none d-lg-flex">
                 <Filter category={category} gender={selectedGender}/>
-            </div>
-            <div className="col-12 lg:col-9">
+            </Col>
+            <Col xs={12} lg={9}>
                 <div className="ms-2 gap-2 d-flex filter-sort-buttons d-lg-none">
                     <Sidebar visible={visible} position="bottom" onHide={() => setVisible(false)}
                              className="w-full h-full">
@@ -88,16 +89,16 @@ function FilteredProductsScreen() {
                                         </p>
                                     }
                     >
-                        <div className="grid">
+                        <Row>
                             {products.map(product => (
-                                <div key={product._id} className="col-6 md:col-4 lg:col-4">
+                                <Col key={product._id} xs={6} md={4}>
                                     <Product product={product} height={'18rem'}/>
-                                </div>
+                                </Col>
                             ))}
-                        </div>
+                        </Row>
                     </InfiniteScroll>)}
-            </div>
-        </div>
+            </Col>
+        </Row>
     </div>)
 }
 
