@@ -40,7 +40,6 @@ const Filter = ({category, gender}) => {
 
 
     const updateFilter = (id, type) => {
-        // Update the state based on the type
         setFilterState((prevState) => {
             const updatedState = {...prevState};
             const selectedItems = updatedState[type];
@@ -65,7 +64,6 @@ const Filter = ({category, gender}) => {
             searchParams.delete(type);
         }
 
-        // Navigate to the updated URL with the new query parameters
         navigate({pathname: location.pathname, search: searchParams.toString()});
     };
     return (
@@ -75,15 +73,15 @@ const Filter = ({category, gender}) => {
                 <div className="filter">
                     <Accordion multiple activeIndex={[0]}>
                         <AccordionTab header="Category">
-                                        {categories && categories.map((category, index) => (
-                                            <div key={index} className="pt-2">
-                                                <Checkbox inputId={index} name="category" value={index}
-                                                          onChange={() => updateFilter(category.category, 'category')}
-                                                          checked={filterState.category.includes(category.category)}/>
-                                                <label htmlFor={index}
-                                                       className="ms-2">{category.category.charAt(0).toUpperCase() + category.category.slice(1)}</label>
-                                            </div>
-                                        ))}
+                            {categories && categories.map((category, index) => (
+                                <div key={index} className="pt-2">
+                                    <Checkbox inputId={index} name="category" value={index}
+                                              onChange={() => updateFilter(category.category, 'category')}
+                                              checked={filterState.category.includes(category.category)}/>
+                                    <label htmlFor={index}
+                                           className="ms-2">{category.category.charAt(0).toUpperCase() + category.category.slice(1)}</label>
+                                </div>
+                            ))}
 
                         </AccordionTab>
                         <AccordionTab header="Size">
@@ -91,7 +89,7 @@ const Filter = ({category, gender}) => {
                                 {boxes.map((size) => (
                                     <div
                                         key={size.size__id}
-                                        className={`${size.size__size > 6 ? "big-box" : "box"} ${filterState.size.includes(size.size__id) ? "selected" : ""}`}
+                                        className={`${size.size__size.length >= 6 ? "big-box" : "box"} ${filterState.size.includes(size.size__id) ? "selected" : ""}`}
                                         onClick={() => updateFilter(size.size__id, 'size')}
                                     >
                                         {size.size__size}

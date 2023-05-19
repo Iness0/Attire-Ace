@@ -10,6 +10,9 @@ class ProductSizeInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductSizeInline]
+    list_filter = ('categories', 'gender')
+    list_display = ['name']
+    ordering = ['name']
 
     def save_related(self, request, form, formsets, change):
         super().save_related(request, form, formsets, change)

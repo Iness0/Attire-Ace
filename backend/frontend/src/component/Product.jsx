@@ -43,14 +43,14 @@ function Product({product, height}) {
                         <>
                             <span style={{
                                 textDecoration: "line-through", marginLeft: '-0.3rem'
-                            }}>{product.price}</span>
+                            }}>${product.price}</span>
                             <span className={'sale-price'}
                                   style={{fontWeight: "bold", color: "red", marginLeft: '1rem'}}>
-                            {product.sale_price}
+                            ${product.sale_price}
                           </span>
                         </>
                     ) : (
-                        <>{product.price}</>
+                        <>${product.price}</>
                     )}
                 </Card.Text>
             </Card.Body>

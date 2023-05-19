@@ -51,8 +51,8 @@ const PriceRange = () => {
                                  mode="currency" currency="USD" locale="en-US"/>
             </div>
             <Slider
-                rangemap
-                max={1500}
+                range
+                max={5000}
                 value={[minPrice, maxPrice]}
                 onChange={(e) => {handleSlide(e.value)}}
                 onSlideEnd={(e) => handleSliderChange(e.value)}

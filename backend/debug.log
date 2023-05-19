@@ -7141,3 +7141,11 @@ Traceback (most recent call last):
   File "/Users/iness0/PycharmProjects/react_django_shop/.venv/lib/python3.11/site-packages/django/template/loader.py", line 47, in select_template
     raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
 django.template.exceptions.TemplateDoesNotExist: index.html
+Watching for file changes with StatReloader
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/
+Unauthorized: /api/users/profile/

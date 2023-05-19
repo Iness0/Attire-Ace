@@ -1,8 +1,4 @@
-from email.headerregistry import Address
-from functools import reduce
-from operator import and_
 from urllib.parse import unquote
-
 from django.conf import settings
 from django.db.models import Q, Count
 from rest_framework.decorators import api_view, permission_classes
@@ -12,6 +8,17 @@ from base.models import Product, Review, Wishlist, ProductCategory, ProductSize
 from base.serializer import ProductSchema, ProductCategorySchema, AddressSchema
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework import status
+
+
+def get_descendant_categories(category, gender):
+    descendants = []
+    children = ProductCategory.objects.filter(parent__category=category, gender__name=gender)
+
+    for child in children:
+        descendants.append(child)
+        descendants.extend(get_descendant_categories(child, gender))
+
+    return descendants
 
 
 def paginate(query, page):
@@ -124,7 +131,7 @@ def getCategories(request, category):
         return Response({'categories': serializer.data, 'sizes': sizes})
 
     gender = request.GET.get('gender', 'men')
-    categories = ProductCategory.objects.filter(parent__category=category, gender__name=gender)
+    categories = get_descendant_categories(category, gender)
     sizes = ProductSize.objects.filter(product__categories__in=categories).values('size__id', 'size__size').distinct()
     serializer = ProductCategorySchema(categories, many=True)
     return Response({'categories': serializer.data, 'sizes': sizes})
@@ -142,15 +149,13 @@ def getProduct(request, pk):
     if product:
         genders = product.gender.all()
         categories = product.categories.all()
-        category_count = categories.count()
 
         related_products = Product.objects.filter(gender__in=genders).exclude(_id=pk)
 
         for category in categories:
             related_products = related_products.filter(categories=category)
 
-        related_products = related_products.annotate(num_categories=Count('categories')).filter(
-            num_categories=category_count)[:5]
+        related_products = related_products[:5]
 
     else:
         related_products = []
