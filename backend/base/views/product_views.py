@@ -106,8 +106,9 @@ def getProductsByCategory(request, category, gender):
 
 @api_view(['GET'])
 def getCategories(request, category):
+    gender = request.GET.get('gender', 'men')
     if category == "sale":
-        sale_products = Product.objects.filter(sale_price__gt=0)
+        sale_products = Product.objects.filter(sale_price__gt=0, gender__name=gender)
         sizes = ProductSize.objects.filter(product__in=sale_products).values('size__id', 'size__size').distinct()
 
         categories_with_counts = (
@@ -119,7 +120,7 @@ def getCategories(request, category):
         return Response({'categories': serializer.data, 'sizes': sizes})
 
     elif category == "new":
-        new_products = Product.objects.filter(new=True)
+        new_products = Product.objects.filter(new=True, gender__name=gender)
         sizes = ProductSize.objects.filter(product__in=new_products).values('size__id', 'size__size').distinct()
 
         categories_with_counts = (
@@ -130,7 +131,6 @@ def getCategories(request, category):
         serializer = ProductCategorySchema(categories_with_counts, many=True)
         return Response({'categories': serializer.data, 'sizes': sizes})
 
-    gender = request.GET.get('gender', 'men')
     categories = get_descendant_categories(category, gender)
     sizes = ProductSize.objects.filter(product__categories__in=categories).values('size__id', 'size__size').distinct()
     serializer = ProductCategorySchema(categories, many=True)
