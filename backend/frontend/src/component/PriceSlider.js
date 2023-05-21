@@ -16,7 +16,6 @@ const PriceRange = () => {
         const max = searchParams.get('max') || 999;
         setMinPrice(min);
         setMaxPrice(max);
-        console.log(min, max)
     }, []);
     const handleSliderChange = (value, type='slider') => {
         if (type === 'min') {
@@ -38,7 +37,6 @@ const PriceRange = () => {
         navigate(`${location.pathname}?${searchParams.toString()}`, {replace: true});
     };
     const handleSlide = (value) => {
-        console.log(value);
         const [min, max] = value;
         if (min < max) {
                 setMinPrice(min);

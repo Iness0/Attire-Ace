@@ -35,7 +35,6 @@ const Filter = ({category, gender}) => {
             category: uniqueList,
             size: sizeList,
         }));
-        console.log(filterState);
     }, [location]);
 
     const updateFilter = (id, type) => {
