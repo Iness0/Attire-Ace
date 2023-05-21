@@ -6,23 +6,6 @@ const HomeAd = ({gender}) => {
 
     return (
         gender === 'men' ? (<div className="hero-section">
-
-            <div className="hero-container">
-                <h4>MOST TRENDING SHOES TO FIT YOUR OWN STYLE</h4>
-                <p>Whether you're hitting the gym or hitting the streets,
-                    our sneakers will keep you looking fresh and on-trend.</p>
-                <Link to={`/${gender}/sneakers`}>
-                    <Button label="Shop Now" className="mt-3"/>
-                </Link>
-
-            </div>
-            <div className="hero-container" style={{
-                backgroundImage: 'url("../../images/u3.avif")',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center center',
-                backgroundSize: 'cover',
-            }}>
-            </div>
             <div className="hero-container" style={{
                 backgroundImage: 'url("../../images/malead.avif")',
                 backgroundRepeat: 'no-repeat',
@@ -39,24 +22,23 @@ const HomeAd = ({gender}) => {
                     <Button label="New Collection" className="mt-3"/>
                 </Link>
             </div>
-
-        </div>) : (<div className="hero-section">
             <div className="hero-container">
                 <h4>MOST TRENDING SHOES TO FIT YOUR OWN STYLE</h4>
-                <p>Make a statement with our bold and fashion-forward women's shoe collection that's guaranteed to turn
-                    heads.</p>
-                <Link to={`/${gender}/shoes`}>
+                <p>Whether you're hitting the gym or hitting the streets,
+                    our sneakers will keep you looking fresh and on-trend.</p>
+                <Link to={`/${gender}/sneakers`}>
                     <Button label="Shop Now" className="mt-3"/>
                 </Link>
 
             </div>
             <div className="hero-container" style={{
-                backgroundImage: 'url("../../images/womanboots.avif")',
+                backgroundImage: 'url("../../images/u3.avif")',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center center',
                 backgroundSize: 'cover',
             }}>
             </div>
+        </div>) : (<div className="hero-section">
             <div className="hero-container" style={{
                 backgroundImage: 'url("../../images/femaleAd.avif")',
                 backgroundRepeat: 'no-repeat',
@@ -72,6 +54,22 @@ const HomeAd = ({gender}) => {
                 <Link to={`/${gender}/new`}>
                     <Button label="New Collection" className="mt-3"/>
                 </Link>
+            </div>
+            <div className="hero-container">
+                <h4>MOST TRENDING SHOES TO FIT YOUR OWN STYLE</h4>
+                <p>Make a statement with our bold and fashion-forward women's shoe collection that's guaranteed to turn
+                    heads.</p>
+                <Link to={`/${gender}/shoes`}>
+                    <Button label="Shop Now" className="mt-3"/>
+                </Link>
+
+            </div>
+            <div className="hero-container" style={{
+                backgroundImage: 'url("../../images/womanboots.avif")',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
+                backgroundSize: 'cover',
+            }}>
             </div>
 
         </div>)

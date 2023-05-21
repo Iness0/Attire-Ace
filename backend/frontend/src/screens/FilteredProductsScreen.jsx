@@ -4,7 +4,7 @@ import Loader from "../component/Loader";
 import {useDispatch, useSelector} from 'react-redux'
 import {listProducts} from "../actions/productActions";
 import {useLocation, useParams} from "react-router-dom";
-import Filter from "../component/filter";
+import Filter from "../component/Filter";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {Sidebar} from 'primereact/sidebar';
 import {Button} from 'primereact/button';

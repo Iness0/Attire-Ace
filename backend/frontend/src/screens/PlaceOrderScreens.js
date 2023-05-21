@@ -95,7 +95,7 @@ function PlaceOrderScreen() {
                                                     <Image src={item.image} alt={item.name} fluid rounded/>
                                                 </Col>
                                                 <Col>
-                                                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                                                    <Link to={`/product/${item.product}`} style={{textDecoration: 'none'}}>{item.name}</Link>
                                                 </Col>
                                                 <Col>{item.size}</Col>
                                                 <Col md={4}>
@@ -111,7 +111,6 @@ function PlaceOrderScreen() {
                 </Col>
 
                 <Col md={4}>
-                    <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>
@@ -164,8 +163,6 @@ function PlaceOrderScreen() {
                                 </Button>
                             </ListGroup.Item>
                         </ListGroup>
-
-                    </Card>
                 </Col>
             </Row>
         </div>

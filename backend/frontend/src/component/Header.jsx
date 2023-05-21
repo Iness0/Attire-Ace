@@ -8,7 +8,7 @@ import {NavDropdown} from "react-bootstrap";
 import {getUserInfo, logout} from "../actions/userActions";
 import SearchBox from './SearchBox';
 import '../App.css';
-import MegaMenu from './pop-up.jsx';
+import MegaMenu from './PopUp.jsx';
 import {categories, subcategories} from "../assets/categories";
 import {CSSTransition} from 'react-transition-group';
 import {Sidebar} from 'primereact/sidebar';

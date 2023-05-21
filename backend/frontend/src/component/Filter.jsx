@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {Accordion, AccordionTab} from 'primereact/accordion';
 import {Checkbox} from 'primereact/checkbox';
-import PriceRange from "./price-slider";
+import PriceRange from "./PriceSlider";
 import {useDispatch, useSelector} from "react-redux";
 import {getCategories} from "../actions/filterActions";
 import Loader from "./Loader";
@@ -26,18 +26,17 @@ const Filter = ({category, gender}) => {
     }, [category, gender])
 
     useEffect(() => {
+        const initialSize = searchParams.get('size');
         const initialCategory = searchParams.get("category")
-        const uniqueList = initialCategory ? [...new Set(initialCategory.split("|"))]
-            : [];
+        const uniqueList = initialCategory ? [...new Set(initialCategory.split("|"))] : [];
+        const sizeList = initialSize ? [...new Set(initialSize.split("|").map(Number))] : [];
         setFilterState(prevState => ({
             ...prevState,
-            category: uniqueList
+            category: uniqueList,
+            size: sizeList,
         }));
+        console.log(filterState);
     }, [location]);
-
-    const categories = subcategories
-    const boxes = sizes
-
 
     const updateFilter = (id, type) => {
         setFilterState((prevState) => {
@@ -73,7 +72,7 @@ const Filter = ({category, gender}) => {
                 <div className="filter">
                     <Accordion multiple activeIndex={[0]}>
                         <AccordionTab header="Category">
-                            {categories && categories.map((category, index) => (
+                            {subcategories && subcategories.map((category, index) => (
                                 <div key={index} className="pt-2">
                                     <Checkbox inputId={index} name="category" value={index}
                                               onChange={() => updateFilter(category.category, 'category')}
@@ -86,7 +85,7 @@ const Filter = ({category, gender}) => {
                         </AccordionTab>
                         <AccordionTab header="Size">
                             <div className=" flex flex-wrap box-selection-container gap-2">
-                                {boxes.map((size) => (
+                                {sizes.map((size) => (
                                     <div
                                         key={size.size__id}
                                         className={`${size.size__size.length >= 6 ? "big-box" : "box"} ${filterState.size.includes(size.size__id) ? "selected" : ""}`}
